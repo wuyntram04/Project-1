@@ -1,0 +1,28 @@
+void insertElement(int x) {
+    if (size == 0) {
+        size = 1;
+        array = new int[size];
+        array[0] = x;
+    } else {
+        int* temp = new int[size + 1];
+
+        // copy tất cả phần tử nhỏ hơn hoặc bằng x
+        int i = 0;
+        while (i < size && array[i] <= x) {
+            temp[i] = array[i];
+            i++;
+        }
+
+        // chèn x vào đúng vị trí
+        temp[i] = x;
+
+        // copy phần còn lại
+        for (int j = i; j < size; j++) {
+            temp[j + 1] = array[j];
+        }
+
+        delete[] array;
+        array = temp;
+        size++;
+    }
+}
