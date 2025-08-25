@@ -1,0 +1,66 @@
+#ifndef DATASET_H
+#define DATASET_H
+
+#include <iostream>
+using namespace std;
+
+class Dataset {
+private:
+    int* array;      // con trỏ đến mảng động
+    int size;        // số phần tử hiện tại
+    int capacity;    // sức chứa (capacity)
+
+public:
+    // Constructor
+    Dataset(int initCap = 4) {
+        if (initCap < 1) initCap = 1;
+        size = 0;
+        capacity = initCap;
+        array = new int[capacity];
+    }
+
+    // Destructor
+    ~Dataset() {
+        delete[] array;
+    }
+
+    // Hàm chèn có sắp xếp
+    void insertElement(int x) {
+        if (size == capacity) {
+            // nếu đầy thì cấp phát thêm gấp đôi
+            int newCapacity = capacity * 2;
+            int* temp = new int[newCapacity];
+            for (int i = 0; i < size; i++)
+                temp[i] = array[i];
+            delete[] array;
+            array = temp;
+            capacity = newCapacity;
+        }
+
+        // tìm vị trí chèn (giữ mảng luôn tăng dần)
+        int i = size - 1;
+        while (i >= 0 && array[i] > x) {
+            array[i + 1] = array[i]; // dịch sang phải
+            i--;
+        }
+        array[i + 1] = x; // chèn x vào đúng chỗ
+        size++;
+    }
+
+    // Hiển thị
+    void display() const {
+        if (size == 0) {
+            cout << "(empty)\n";
+            return;
+        }
+        for (int i = 0; i < size; i++) {
+            cout << array[i] << (i == size - 1 ? '\n' : ' ');
+        }
+    }
+
+    // Getter
+    int getSize() const { return size; }
+    int getCapacity() const { return capacity; }
+};
+
+#endif
