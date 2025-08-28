@@ -43,9 +43,23 @@ public:
 		return Sum() / getSize();
 	}
 
-	int Median() const
-	{
+	double Median() const
+{
+	int n = getSize();
 
+	if (n % 2 == 1)
+	{
+		int p = (n + 1) / 2.0;
+		return data()[p - 1];
 	}
+	else
+	{
+		int p = n / 2;
+		int left = data()[p - 1];
+		int right = data()[p];
+		return (left + right) / 2.0;
+	}
+}
 };
+
 
