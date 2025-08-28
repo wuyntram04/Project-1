@@ -176,7 +176,7 @@ void insertMenu()
         break;
         case 'B':
         {
-            int count = inputInteger("\n\n\tSpecify a number of values to be randomly generated into the Dataset: ", 1, 1000);
+            int count = inputInteger("\n\n\tSpecify a number of values to be randomly generated into the Dataset: ", true);
             int maxVal = 100;
             ds.insertSort(count, maxVal);
             cout << "\n\tCONFIRMATION: Inserted " << count << " random values into the Dataset.\n";
