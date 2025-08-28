@@ -55,7 +55,7 @@ public:
     }
 
     // NEW: insert exactly one specified value
-    void insertSort(int value) 
+    void insertSort(int value)
     {
         insertOne(value);
     }
@@ -63,7 +63,7 @@ public:
     // existing: insert 'count' random values in [0..maxValue]
     void insertSort(int count, int maxValue)
     {
-        for (int i = 0; i < count; i++) 
+        for (int i = 0; i < count; i++)
         {
             int rnd = rand() % (maxValue + 1);
             insertOne(rnd);
@@ -72,22 +72,34 @@ public:
 
     void display() const
     {
-        if (size == 0)
+        /*if (size == 0)
         {
             cout << "(empty)\n";
             return;
-        }
-        cout << "\n\n\t";
+        }*/
+        cout << "\n\t";
         for (int i = 0; i < size; i++)
         {
             cout << array[i] << (i == size - 1 ? '\n' : ' ');
         }
     }
 
+    bool CheckEmpty() const
+    {
+        if (size == 0)
+        {
+            cout << "\n\tException Error: Dataset is empty.";
+            return true;
+        }
+        return false;
+    }
+
     // Getter
     int getSize() const { return size; }
     int getCapacity() const { return capacity; }
-    
+    const int* data() const { return array; }
+
+
 
     void setSample(bool sample) { isSample = sample; }
     string getType() const
@@ -102,6 +114,7 @@ public:
         }
     }
 
+   
+
 
 };
-
