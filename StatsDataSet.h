@@ -60,6 +60,38 @@ public:
 		return (left + right) / 2.0;
 	}
 }
+
+double StandDeviation() const
+{
+	double ssdevia = 0.00;
+	const  int* a = data();
+	for (int i = 0; i < getSize(); i++)
+	{
+		double devia = a[i] - Mean();
+
+		ssdevia += devia * devia;
+	}
+
+	bool sample = (getType() == "Sample");
+
+	double denominator;
+	if (sample)
+	{
+		if (getSize() < 2) return 0.0;
+		else 
+		denominator = getSize() - 1;
+	}
+	else
+	{
+		denominator = getSize()*1.0;
+	}
+
+	double variable = sqrt(double(ssdevia / denominator));
+
+	return variable;
+
+}
 };
+
 
 
