@@ -1,3 +1,4 @@
+
 #include<iostream>
 #include <iomanip>
 #include"input.h"
@@ -10,6 +11,8 @@ using namespace std;
 void showMenu();
 void showIntro();
 void insertMenu();
+void deleteMenu();
+void Menu1();
 //Dataset ds;
 StatsDataSet ds;
 
@@ -26,85 +29,45 @@ int main()
         cout << "\n\tDataset: (" << ds.getType() << ")\n\t";
         ds.display();
         showMenu();
-        
+
         switch (toupper(inputChar("\n\tOption: ")))
-            {
-            case '0': exit(0);
-            case '1':
-            {
-                system("cls");
-
-                cout << "\n\n\tIn statistics, Population refers to the entire group of data";
-                cout << "\n\tpoints that a study is interested in, while a Sample is a";
-                cout << "\n\tsubset of that population that is actually used in the study.";
-
-                cout << "\n\n\tConfigure Dataset Menu";
-                cout << "\n\t" << string(80, char(205));
-                cout << "\n\t\tA. sample";
-                cout << "\n\t\tB. population";
-                cout << "\n\t" << string(80, char(196));
-                cout << "\n\t\tR. return";
-                cout << "\n\t" << string(80, char(205));
-
-                switch (toupper(inputChar("\n\t\tOption: ")))
-                {
-                case 'A':
-                {
-                    cout << "\n\tData Set configured for Sample";
-                    ds.setSample(true);
-                }
-                break;
-
-                case 'B':
-                {
-                    cout << "\n\tData Set configured for Population";
-                    ds.setSample(false);
-                }
-                break;
-                case 'R': break;
-                }
-            }
+        {
+        case '0': exit(0);
+        case '1':
+            Menu1();       
             break;
-            case '2':
-            {
-                insertMenu();
-                break;
-            }
-            case 'A':
-                if (ds.CheckEmpty()) break;
-                cout << "\n\tMinimum = \t" << ds.Minimum();
-                break;
-            case 'B':
-                if (ds.CheckEmpty()) break;
-                cout << "\n\tMaximum = \t" << ds.Maximum();
-                break;
-            case'C':
-                if (ds.CheckEmpty()) break;
-                cout << "\n\tRange = \t" << ds.Range();
-                break;
-            case'D':
-                cout << "\n\tSize = \t" << ds.getSize();
-                break;
-            case'E':
-                if (ds.CheckEmpty()) break;
-                cout << "\n\tSum = \t" << ds.Sum();
-                break;
-            case 'F':
-                if (ds.CheckEmpty()) break;
-                cout << "\n\tMean = \t" << ds.Mean();
-                break;
-            default: cout << "\t\tERROR - Invalid option."; break;
-            }
-            case 'J':
-                if (ds.CheckEmpty()) break;
-                cout << "\n\tVariance = \t" << ds.Variance();
-                break;
-            case 'K':
-                if (ds.CheckEmpty()) break;
-                cout << "\n\tMidrange = \t" << ds.MidRange();
-                break;
-        
-       
+        case '2':
+            insertMenu();
+            break;
+        case '3':
+            if (ds.CheckEmpty()) break;
+            deleteMenu();
+            break;
+        case 'A':
+            if (ds.CheckEmpty()) break;
+            cout << "\n\tMinimum = \t" << ds.Minimum();
+            break;
+        case 'B':
+            if (ds.CheckEmpty()) break;
+            cout << "\n\tMaximum = \t" << ds.Maximum();
+            break;
+        case'C':
+            if (ds.CheckEmpty()) break;
+            cout << "\n\tRange = \t" << ds.Range();
+            break;
+        case'D':
+            cout << "\n\tSize = \t" << ds.getSize();
+            break;
+        case'E':
+            if (ds.CheckEmpty()) break;
+            cout << "\n\tSum = \t" << ds.Sum();
+            break;
+        case 'F':
+            if (ds.CheckEmpty()) break;
+            cout << "\n\tMean = \t" << ds.Mean();
+            break;
+        default: cout << "\t\tERROR - Invalid option."; break;
+        }
 
         cout << "\n";
         system("pause");
@@ -116,7 +79,7 @@ int main()
 
 void showMenu()
 {
-    if(ds.getSize()==0)
+    if (ds.getSize() == 0)
     {
         cout << "\n\tERROR: Data Set requires at least 2 values.\n";
     }
@@ -184,7 +147,7 @@ void insertMenu()
         break;
         case 'B':
         {
-            int count = inputInteger("\n\n\tSpecify a number of values to be randomly generated into the Dataset: ", true);
+            int count = inputInteger("\n\n\tSpecify a number of values to be randomly generated into the Dataset: ", 1, true);
             int maxVal = 100;
             ds.insertSort(count, maxVal);
             cout << "\n\tCONFIRMATION: Inserted " << count << " random values into the Dataset.\n";
@@ -229,7 +192,102 @@ void insertMenu()
         case 'R':
             return;
             break;
+
+        default:
+            cout << "\n\tERROR: Invalid input. Must be one of 'ABCR' character.";
         }
+
+        cout << "\n\n\t";
+        
+
+    } while (true);
+    system("pause");
+
+}
+
+void Menu1()
+{
+    do
+    {
+        system("cls");
+
+        cout << "\n\n\tIn statistics, Population refers to the entire group of data";
+        cout << "\n\tpoints that a study is interested in, while a Sample is a";
+        cout << "\n\tsubset of that population that is actually used in the study.";
+
+        cout << "\n\n\tConfigure Dataset Menu";
+        cout << "\n\t" << string(80, char(205));
+        cout << "\n\t\tA. sample";
+        cout << "\n\t\tB. population";
+        cout << "\n\t" << string(80, char(196));
+        cout << "\n\t\tR. return";
+        cout << "\n\t" << string(80, char(205));
+
+        switch (toupper(inputChar("\n\t\tOption: ")))
+        {
+        case 'A':
+        {
+            cout << "\n\tData Set configured for Sample";
+            ds.setSample(true);
+        }
+        break;
+
+        case 'B':
+        {
+            cout << "\n\tData Set configured for Population";
+            ds.setSample(false);
+        }
+        break;
+        case 'R': return;
+        default:
+            cout << "\n\tERROR: Invalid input. Must be one of 'ABCR' character.";
+        }
+
+        cout << "\n\n\t";
+        system("pause");
+    } while (true);
+}
+
+void deleteMenu()
+{
+    do
+    {
+        system("cls");
+        cout << "\n\tDelete Dataset Menu";
+        cout << "\n\t" << string(80, char(205));
+        cout << "\n\t\tA. delete a value";
+        cout << "\n\t\tB. delete a range of values";
+        cout << "\n\t\tC. delete all values";
+        cout << "\n\t" << string(80, char(196));
+        cout << "\n\t\tR. return";
+        cout << "\n\t" << string(80, char(205));
+
+        switch (toupper(inputChar("\n\t\tOption: ", 'ABCR')))
+        {
+        case 'A':
+        {
+            int val = inputInteger("\n\tSpecify an integer value to find and be deleted from the Dataset: ");
+            ds.deleteValue(val);
+            
+        }
+        break;
+        case 'B':
+        {
+            int startVal = inputInteger("\n\tSpecify a starting integer value to be deleted from the Dataset: ");
+            int endVal = inputInteger("\n\tSpecify an ending integer value to be deleted from the Dataset: ");
+            ds.deleteRange(startVal, endVal);
+        }
+        break;
+        case 'C':
+            ds.deleteAllValues();
+            break;
+        case 'R': return;
+        default:
+            cout << "\n\tERROR: Invalid input. Must be one of 'ABCR' character.";
+        }
+
+        cout << "\n\n\t";
+        system("pause");
 
     } while (true);
 
