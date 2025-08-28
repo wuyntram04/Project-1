@@ -95,6 +95,14 @@ int main()
                 break;
             default: cout << "\t\tERROR - Invalid option."; break;
             }
+            case 'J':
+                if (ds.CheckEmpty()) break;
+                cout << "\n\tVariance = \t" << ds.Variance();
+                break;
+            case 'K':
+                if (ds.CheckEmpty()) break;
+                cout << "\n\tMidrange = \t" << ds.MidRange();
+                break;
         
        
 
