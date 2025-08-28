@@ -38,9 +38,9 @@ public:
 		return sum;
 	}
 
-	int Mean() const
+	double Mean() const
 	{
-		return Sum() / getSize();
+		return (Sum() / getSize()) * 1.0;
 	}
 
 	double Median() const
@@ -91,7 +91,64 @@ double StandDeviation() const
 	return variable;
 
 }
+
+void Mode() const
+{
+	int n = getSize();
+	const int* arr = data();
+
+	int maxCount = 1;
+	int currentCount = 1;
+
+	for (int i = 1; i <= n; i++)
+	{
+		if (i < n && arr[i] == arr[i - 1])
+		{
+			currentCount++;
+		}
+		else if(currentCount > maxCount)
+		{
+			maxCount = currentCount;
+			currentCount = 1;
+		}
+	}
+
+	cout << "\n\tMode(s) = \t";
+	currentCount = 1;
+	for (int i = 1; i <= n; i++) 
+	{
+		if (i < n && arr[i] == arr[i - 1]) 
+		{
+			currentCount++;
+		}
+		else 
+		{
+			if (currentCount == maxCount) 
+			{
+				
+				cout << arr[i - 1]<<" ";
+			}
+			currentCount = 1;
+		}
+	}
+}
+
+double SumOfSquare() const
+{
+	const int* arr = data();
+
+	double ss = 0;
+	double m = Mean();
+	for (int i = 0; i < getSize(); i++)
+	{
+		double square = pow((arr[i] - m), 2) * 1.0;
+		ss += square *1.0;
+	}
+	return ss;
+}
+
 };
+
 
 
 
