@@ -156,6 +156,44 @@ double SumOfSquare() const
 	return ss;
 }
 
+double MeanAbsoluteDeviation() const
+{
+	const int* arr = data();
+	double m = Mean();
+	int n = getSize();
+	double numerator = 0;
+
+	for (int i = 0; i < n; i++)
+	{
+		numerator += abs(arr[i] - m);
+	}
+	return numerator / (n*1.0);
+}
+
+double RootMeanSquare() const
+{
+	const int* arr = data();
+	int n = getSize();
+	double sum = 0;
+	
+	for (int i = 0; i < n; i++)
+	{
+		sum += pow(arr[i], 2);
+		
+	}
+	return sqrt(sum / (n * 1.0));
+}
+
+double StandardError() const
+{
+	int n = getSize();
+
+	return StandDeviation() / sqrt((n * 1.0));
+}
+
+
+
+
 double Skewness() const
 {
 	int n = getSize();
@@ -248,7 +286,18 @@ double KurtosisExcess() const
 
 }
 
+double CoefficientOfVariation() const
+{
+	return StandDeviation() / Mean();
+}
+
+double RelativeSD() const
+{
+	return CoefficientOfVariation() * 100.0;
+}
+
 };
+
 
 
 
