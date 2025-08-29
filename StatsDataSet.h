@@ -447,9 +447,60 @@ void FrequencyTable() const
 
 	}
 
+	
+
+}
+
+void displayALL()
+{
+	cout << "\n\tMinimum \t\t = " << Minimum();
+	cout << "\n\tMaximum \t\t = " << Maximum();
+	cout << "\n\tRange \t\t\t = " << Range();
+	cout << "\n\tSize \t\t\t = " << getSize();
+	cout << "\n\tSum \t\t\t = " << Sum();
+	cout << "\n\tMean \t\t\t = " << Mean();
+	cout << "\n\tMedian \t\t\t = " << Median();
+	Mode();
+	cout << "\n\tStandard Deviation \t = " << StandDeviation();
+	cout << "\n\tVariance \t\t = " << Variance();
+	cout << "\n\tMidrange \t\t = " << MidRange();
+	cout << "\n\tQuartiles  \t\tQuartiles: ";
+	cout << "\n\t\t\t\tQ1 --> " << fixed << setprecision(1) << Q1();
+	cout << "\n\t\t\t\tQ2 --> " << fixed << setprecision(1) << Median();
+	cout << "\n\t\t\t\tQ3 --> " << fixed << setprecision(1) << Q3();
+	cout << "\n\tInterquartile Range \t = " << IQR();
+	cout << "\n\tOutlinears \t\t =  ";
+	int* out = nullptr;
+	int m = 0;
+	double lower = 0.0, upper = 0.0;
+
+	Outliners(out, m, lower, upper);
+
+	if (m == 0)
+	{
+		cout << "none";
+	}
+	else
+	{
+
+		for (int i = 0; i < m; ++i)
+		{
+			if (i > 0)
+				cout << out[i];
+		}
+
+	}
+	if (out) delete[] out;
+
+	cout << "\n\tSum of Square \t\t = " << SumOfSquare();
+	cout << "\n\tSkewness \t\t = " << setprecision(9) << Skewness();
+	cout << "\n\tKurtosis \t\t = " << setprecision(9) << Kurtosis();
+	cout << "\n\tKurtosis Excess \t = " << setprecision(9) << KurtosisExcess();
+
 
 }
 };
+
 
 
 
