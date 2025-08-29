@@ -158,6 +158,18 @@ case 'U':
     if (ds.CheckEmpty()) break;
     cout << "\n\tKurtosis Excess \t\t = " << setprecision(9) << ds.KurtosisExcess();
     break;
+case 'V':
+    if (ds.CheckEmpty()) break;
+    cout << "\n\t  Coefficient of Variation \t\t = " << ds.CoefficientOfVariation();
+    break;
+case 'W':
+    if (ds.CheckEmpty()) break;
+    cout << "\n\t  Relative Standard Deviation \t\t = " << ds.RelativeSD();
+    break;
+case'X':
+    if (ds.CheckEmpty()) break;
+    ds.FrequencyTable();
+    break;
  case 'Y': ds.displayALL(); break;
         default: cout << "\t\tERROR - Invalid option."; break;
         }
