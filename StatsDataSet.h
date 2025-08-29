@@ -100,7 +100,127 @@ double MidRange() const
 {
 	return (Maximum() - Minimum()) / 2;
 }
+double medianInRange(int lo, int hi) const
+	{
+		int len = hi - lo;
+		if (len <= 0) return 0.0;
 
+		const int* a = data(); 
+
+		if (len % 2 == 1)
+		{
+			int mid = lo + (len / 2);
+			return a[mid];
+		}
+		else
+		{
+			int right = lo + (len / 2);
+			int left = right - 1;
+			return (a[left] + a[right]) / 2.0;
+		}
+	}
+	double Q1() const
+	{
+		int n = getSize();
+
+		if (n == 0) return 0;
+
+		int mid = n / 2;
+
+		if (n % 2 == 1)
+		{
+			// odd: lower = [0, mid)
+			return medianInRange(0, mid);
+		}
+		else
+		{
+			// even: lower = [0, mid)
+			return medianInRange(0, mid);
+		}
+	}
+
+	double Q3() const
+	{
+		int n = getSize();
+		if (n == 0) return 0.0;
+
+		int mid = n / 2;
+
+		if (n % 2 == 1)
+		{
+			// odd: upper = (mid, n) => [mid+1, n)
+			return medianInRange(mid + 1, n);
+		}
+		else
+		{
+			// even: upper = [mid, n)
+			return medianInRange(mid, n);
+		}
+	}
+
+	double IQR() const
+	{
+		return Q3() - Q1();
+	}
+
+	void Outliners( int *&outArr, int &outCount , double & lower, double &upper) 
+	{
+		outArr = nullptr;
+		outCount = 0;
+		lower = 0.0;
+		upper = 0.0;
+
+		int n = getSize();
+
+		if (n == 0) return;
+
+		lower = Q1() - 1.5 * IQR();
+		upper = Q3() + 1.5 * IQR();
+
+		const int* a = data();
+
+		int cntSmall = 0, cntLarge = 0;
+		for (int i = 0; i < n; ++i) 
+		{
+			int x = a[i];
+			if (x < lower) 
+			{
+				cntSmall++;
+			}
+			else
+			{
+				if (x > upper) 
+				{
+					cntLarge++; 
+				}
+			}
+		}
+
+		int total = cntSmall + cntLarge;
+		if (total == 0) return;
+
+		outArr = new int[total];
+		outCount = total;
+
+		int k = 0;
+		for (int i = 0; i < n; ++i)
+		{
+			int x = a[i];
+			if (x < lower)
+			{
+				outArr[k++] = x;
+			}
+		}
+
+		for (int i = 0; i < n; ++i)
+		{
+			int x = a[i];
+			if (x > upper)
+			{
+				outArr[k++] = x;
+			}
+		}
+	}
 void Mode() const
 {
 	int n = getSize();
@@ -297,6 +417,7 @@ double RelativeSD() const
 }
 
 };
+
 
 
 
