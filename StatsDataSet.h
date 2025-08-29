@@ -330,8 +330,8 @@ double Skewness() const
 		double cubed = pow((arr[i] - mean)/stdev, 3);
 		sumCubed += cubed;
 	}
-
-	if (sample())
+	bool sample = (getType() == "Sample");
+	if (sample)
 	{
 		if (n < 3) return 0.0;
 		double factor = (n * 1.0) / ((n - 1.0) * (n - 2.0));
@@ -359,8 +359,10 @@ double Kurtosis() const
 		double diff = arr[i] - mean;
 		sumFourth += pow(diff, 4);
 	}
-
-	if (sample())
+	
+	bool sample = (getType() == "Sample");
+	
+	if (sample)
 	{
 		// Sample kurtosis using your exact formula
 		double factor = (n * (n + 1.0)) / ((n - 1.0) * (n - 2.0) * (n - 3.0));
@@ -392,8 +394,9 @@ double KurtosisExcess() const
 		sumFourth += pow(diff, 4);
 	}
 
+	bool sample = (getType() == "Sample");
 	
-	if (sample())
+	if (sample)
 	{
 		double term1 = (n * (n + 1.0)) / ((n - 1.0) * (n - 2.0) * (n - 3.0)) * (sumFourth / pow(stdev, 4));
 		double term2 = (3.0 * (n - 1.0) * (n - 1.0)) / ((n - 2.0) * (n - 3.0));
@@ -500,6 +503,7 @@ void displayALL()
 
 }
 };
+
 
 
 
