@@ -91,6 +91,15 @@ double StandDeviation() const
 	return variable;
 
 }
+double Variance() const
+{
+	return StandDeviation()*StandDeviation();
+}
+
+double MidRange() const
+{
+	return (Maximum() - Minimum()) / 2;
+}
 
 void Mode() const
 {
@@ -148,6 +157,7 @@ double SumOfSquare() const
 }
 
 };
+
 
 
 
