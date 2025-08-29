@@ -90,6 +90,18 @@ int main()
             if (ds.CheckEmpty()) break;
             cout << "\n\tSum of Square \t\t = " << ds.SumOfSquare();
             break;
+case 'P':
+    if (ds.CheckEmpty()) break;
+    cout << "\n\tMean Absolute Deviation \t\t = " << ds.MeanAbsoluteDeviation();
+    break;
+case 'Q':
+    if (ds.CheckEmpty()) break;
+    cout << "\n\tRoot Mean Square \t\t = " << ds.RootMeanSquare();
+    break;
+case 'R':
+    if (ds.CheckEmpty()) break;
+    cout << "\n\t Standard Error of the Mean \t\t = " << ds.StandardError();
+    break;
         default: cout << "\t\tERROR - Invalid option."; break;
         }
 
