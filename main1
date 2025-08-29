@@ -102,6 +102,22 @@ case 'R':
     if (ds.CheckEmpty()) break;
     cout << "\n\t Standard Error of the Mean \t\t = " << ds.StandardError();
     break;
+case'O':
+    if (ds.CheckEmpty()) break;
+    cout << "\n\tSum of Square \t\t = " << ds.SumOfSquare();
+    break;
+case 'S':
+    if (ds.CheckEmpty()) break;
+    cout << "\n\tSkewness \t\t = " << ds.Skewness();
+    break;
+case 'T': 
+    if (ds.CheckEmpty()) break;
+    cout << "\n\tKurtosis \t\t = " << setprecision(9) << ds.Kurtosis();
+    break;
+case 'U':
+    if (ds.CheckEmpty()) break;
+    cout << "\n\tKurtosis Excess \t\t = " << setprecision(9) << ds.KurtosisExcess();
+    break;
         default: cout << "\t\tERROR - Invalid option."; break;
         }
 
