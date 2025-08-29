@@ -272,16 +272,16 @@ double KurtosisExcess() const
 		sumFourth += pow(diff, 4);
 	}
 
-	double alpha4;
+	
 	if (sample())
 	{
 		double term1 = (n * (n + 1.0)) / ((n - 1.0) * (n - 2.0) * (n - 3.0)) * (sumFourth / pow(stdev, 4));
 		double term2 = (3.0 * (n - 1.0) * (n - 1.0)) / ((n - 2.0) * (n - 3.0));
-		alpha4 = term1 - term2;
+		return (term1 - term2);
 	}
 	else
 	{
-		alpha4 = (sumFourth / (n * pow(stdev, 4))) - 3.0;
+		return (sumFourth / (n * pow(stdev, 4))) - 3.0;
 	}
 
 }
@@ -297,6 +297,7 @@ double RelativeSD() const
 }
 
 };
+
 
 
 
