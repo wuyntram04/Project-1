@@ -74,6 +74,18 @@ int main()
             if (ds.CheckEmpty()) break;
             ds.Mode();
             break;
+        case 'I':
+            if (ds.CheckEmpty()) break;
+            cout << "\n\tStandard Deviation = \t" << ds.StandDeviation();
+            break;
+        case 'J':
+            if (ds.CheckEmpty()) break;
+            cout << "\n\tVariance = \t" << ds.Variance();
+            break;
+        case 'K':
+            if (ds.CheckEmpty()) break;
+            cout << "\n\tMidrange = \t" << ds.MidRange();
+            break;
         case'O':
             if (ds.CheckEmpty()) break;
             cout << "\n\tSum of Square \t\t = " << ds.SumOfSquare();
