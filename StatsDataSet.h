@@ -416,7 +416,41 @@ double RelativeSD() const
 	return CoefficientOfVariation() * 100.0;
 }
 
+void FrequencyTable() const
+{
+	int n = getSize();
+	const int* arr = data();
+
+	cout << left << setw(10) << "Value"
+		<< setw(12) << "Frequency"
+		<< setw(12) << "Frequency %" << endl;
+
+	int i = 0;
+	while (i < n)
+	{
+		int value = arr[i];
+		int count = 1;
+
+		while (i + count < n && arr[i + count] == value)
+		{
+			count++;
+		}
+
+		double percent = (count * 100.0) / n;
+
+
+		cout << left << setw(10) << value
+			<< setw(12) << count
+			<< setw(12) << percent << endl;
+
+		i += count;
+
+	}
+
+
+}
 };
+
 
 
 
