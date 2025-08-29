@@ -158,6 +158,7 @@ case 'U':
     if (ds.CheckEmpty()) break;
     cout << "\n\tKurtosis Excess \t\t = " << setprecision(9) << ds.KurtosisExcess();
     break;
+ case 'Y': ds.displayALL(); break;
         default: cout << "\t\tERROR - Invalid option."; break;
         }
 
