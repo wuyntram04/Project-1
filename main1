@@ -66,6 +66,18 @@ int main()
             if (ds.CheckEmpty()) break;
             cout << "\n\tMean = \t" << ds.Mean();
             break;
+        case 'G':
+            if (ds.CheckEmpty()) break;
+            cout << "\n\tMedian \t\t = " << ds.Median();
+            break;
+        case'H':
+            if (ds.CheckEmpty()) break;
+            ds.Mode();
+            break;
+        case'O':
+            if (ds.CheckEmpty()) break;
+            cout << "\n\tSum of Square \t\t = " << ds.SumOfSquare();
+            break;
         default: cout << "\t\tERROR - Invalid option."; break;
         }
 
