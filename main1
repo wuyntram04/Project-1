@@ -86,6 +86,46 @@ int main()
             if (ds.CheckEmpty()) break;
             cout << "\n\tMidrange = \t" << ds.MidRange();
             break;
+case 'L':
+    if (ds.CheckEmpty()) break;
+    cout << "\n\tQuartiles  \t\tQuartiles: ";
+    cout << "\n\t\t\t\tQ1 --> " << fixed << setprecision (1) << ds.Q1();
+    cout << "\n\t\t\t\tQ2 --> " << fixed << setprecision(1) << ds.Median();
+    cout << "\n\t\t\t\tQ3 --> " << fixed << setprecision(1) << ds.Q3();
+    break;
+case 'M':
+    if (ds.CheckEmpty()) break;
+    cout << "\n\tInterquartile Range = \t" << ds.IQR();
+    break;
+case 'N':
+{
+    if (ds.CheckEmpty()) break;
+
+    cout << "\n\tOutlinears  = \t ";
+    int* out = nullptr;
+    int m = 0;
+    double lower = 0.0, upper = 0.0;
+
+    ds.Outliners(out, m, lower, upper);
+
+    if (m == 0)
+    {
+        cout << "none";
+    }
+    else
+    {
+        
+        for (int i = 0; i < m; ++i)
+        {
+            if (i > 0) 
+            cout << out[i];
+        }
+        
+    }
+    if (out) delete[] out;
+    break;
+
+}
         case'O':
             if (ds.CheckEmpty()) break;
             cout << "\n\tSum of Square \t\t = " << ds.SumOfSquare();
