@@ -156,7 +156,100 @@ double SumOfSquare() const
 	return ss;
 }
 
+double Skewness() const
+{
+	int n = getSize();
+	if (n == 0) return 0.0;
+
+	const int* arr = data();
+	double mean = Mean();
+	double stdev = StandDeviation();
+	//if (stdev == 0.0) return 0.0;
+
+	double sumCubed = 0.0;
+	for (int i = 0; i < n; i++)
+	{
+		double cubed = pow((arr[i] - mean)/stdev, 3);
+		sumCubed += cubed;
+	}
+
+	if (sample())
+	{
+		if (n < 3) return 0.0;
+		double factor = (n * 1.0) / ((n - 1.0) * (n - 2.0));
+		return factor * sumCubed;
+	}
+	else
+	{
+		return sumCubed / (n * pow(stdev, 3));
+	}
+}
+
+double Kurtosis() const
+{
+	int n = getSize();
+	if (n < 4) return 0.0; // need at least 4 values for sample formula
+
+	const int* arr = data();
+	double mean = Mean();
+	double stdev = StandDeviation();
+	if (stdev == 0.0) return 0.0;
+
+	double sumFourth = 0.0;
+	for (int i = 0; i < n; i++)
+	{
+		double diff = arr[i] - mean;
+		sumFourth += pow(diff, 4);
+	}
+
+	if (sample())
+	{
+		// Sample kurtosis using your exact formula
+		double factor = (n * (n + 1.0)) / ((n - 1.0) * (n - 2.0) * (n - 3.0));
+		return factor * (sumFourth / pow(stdev, 4));
+	}
+	else
+	{
+		// Population kurtosis
+		return sumFourth / (n * pow(stdev, 4));
+	}
+
+	
+}
+
+double KurtosisExcess() const
+{
+	int n = getSize();
+	if (n < 4) return 0.0;
+
+	const int* arr = data();
+	double mean = Mean();
+	double stdev = StandDeviation();
+	if (stdev == 0.0) return 0.0;
+
+	double sumFourth = 0.0;
+	for (int i = 0; i < n; i++)
+	{
+		double diff = arr[i] - mean;
+		sumFourth += pow(diff, 4);
+	}
+
+	double alpha4;
+	if (sample())
+	{
+		double term1 = (n * (n + 1.0)) / ((n - 1.0) * (n - 2.0) * (n - 3.0)) * (sumFourth / pow(stdev, 4));
+		double term2 = (3.0 * (n - 1.0) * (n - 1.0)) / ((n - 2.0) * (n - 3.0));
+		alpha4 = term1 - term2;
+	}
+	else
+	{
+		alpha4 = (sumFourth / (n * pow(stdev, 4))) - 3.0;
+	}
+
+}
+
 };
+
 
 
 
