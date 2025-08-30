@@ -99,18 +99,24 @@ public:
         return static_cast<const void*>(array);
     }
     void display() const
+{
+    /*if (size == 0)
     {
-        /*if (size == 0)
+        cout << "(empty)\n";
+        return;
+    }*/
+    const int perLine = 15; // number of elements before wrapping
+    cout << "\n\t";
+    for (int i = 0; i < size; i++)
+    {
+        cout << setw(5) << array[i];
+        if ((i + 1) % perLine == 0 && i != size - 1)
         {
-            cout << "(empty)\n";
-            return;
-        }*/
-        cout << "\n\t";
-        for (int i = 0; i < size; i++)
-        {
-            cout << array[i] << (i == size - 1 ? '\n' : ' ');
+            cout << "\n\t"; // indent new line
         }
     }
+    cout << "\n";
+}
 
     bool CheckEmpty() const
     {
@@ -263,3 +269,4 @@ public:
     }
 
 };
+
