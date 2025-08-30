@@ -24,8 +24,12 @@ int main()
     do
     {
         system("cls");
-
-        cout << "\n\tAddress of Dynamic array: ";
+        if (ds.getSize() == 0) {
+            cout << "\n\tAddress of Dynamic array: 0000000000000000";   // lưu ý
+        }
+        else {
+            cout << "\n\tAddress of Dynamic array: " << ds.rawAddress(); // lưu ý
+        }
         cout << "\n\tDataset: (" << ds.getType() << ")\n\t";
         ds.display();
         showMenu();
@@ -34,7 +38,7 @@ int main()
         {
         case '0': exit(0);
         case '1':
-            Menu1();       
+            Menu1();
             break;
         case '2':
             insertMenu();
@@ -86,91 +90,87 @@ int main()
             if (ds.CheckEmpty()) break;
             cout << "\n\tMidrange = \t" << ds.MidRange();
             break;
-case 'L':
-    if (ds.CheckEmpty()) break;
-    cout << "\n\tQuartiles  \t\tQuartiles: ";
-    cout << "\n\t\t\t\tQ1 --> " << fixed << setprecision (1) << ds.Q1();
-    cout << "\n\t\t\t\tQ2 --> " << fixed << setprecision(1) << ds.Median();
-    cout << "\n\t\t\t\tQ3 --> " << fixed << setprecision(1) << ds.Q3();
-    break;
-case 'M':
-    if (ds.CheckEmpty()) break;
-    cout << "\n\tInterquartile Range = \t" << ds.IQR();
-    break;
-case 'N':
-{
-    if (ds.CheckEmpty()) break;
-
-    cout << "\n\tOutlinears  = \t ";
-    int* out = nullptr;
-    int m = 0;
-    double lower = 0.0, upper = 0.0;
-
-    ds.Outliners(out, m, lower, upper);
-
-    if (m == 0)
-    {
-        cout << "none";
-    }
-    else
-    {
-        
-        for (int i = 0; i < m; ++i)
+        case 'L':
+            if (ds.CheckEmpty()) break;
+            cout << "\n\tQuartiles  \t\tQuartiles: ";
+            cout << "\n\t\t\t\tQ1 --> " << fixed << setprecision(1) << ds.Q1();
+            cout << "\n\t\t\t\tQ2 --> " << fixed << setprecision(1) << ds.Median();
+            cout << "\n\t\t\t\tQ3 --> " << fixed << setprecision(1) << ds.Q3();
+            break;
+        case 'M':
+            if (ds.CheckEmpty()) break;
+            cout << "\n\tInterquartile Range = \t" << ds.IQR();
+            break;
+        case 'N':
         {
-            if (i > 0) 
-            cout << out[i];
-        }
-        
-    }
-    if (out) delete[] out;
-    break;
+            if (ds.CheckEmpty()) break;
 
-}
+            cout << "\n\tOutlinears  = \t ";
+            int* out = nullptr;
+            int m = 0;
+            double lower = 0.0, upper = 0.0;
+
+            ds.Outliners(out, m, lower, upper);
+
+            if (m == 0)
+            {
+                cout << "none";
+            }
+            else
+            {
+
+                for (int i = 0; i < m; ++i)
+                {
+                    if (i > 0)
+                        cout << out[i];
+                }
+
+            }
+            if (out) delete[] out;
+            break;
+
+        }
         case'O':
             if (ds.CheckEmpty()) break;
             cout << "\n\tSum of Square \t\t = " << ds.SumOfSquare();
             break;
-case 'P':
-    if (ds.CheckEmpty()) break;
-    cout << "\n\tMean Absolute Deviation \t\t = " << ds.MeanAbsoluteDeviation();
-    break;
-case 'Q':
-    if (ds.CheckEmpty()) break;
-    cout << "\n\tRoot Mean Square \t\t = " << ds.RootMeanSquare();
-    break;
-case 'R':
-    if (ds.CheckEmpty()) break;
-    cout << "\n\t Standard Error of the Mean \t\t = " << ds.StandardError();
-    break;
-case'O':
-    if (ds.CheckEmpty()) break;
-    cout << "\n\tSum of Square \t\t = " << ds.SumOfSquare();
-    break;
-case 'S':
-    if (ds.CheckEmpty()) break;
-    cout << "\n\tSkewness \t\t = " << ds.Skewness();
-    break;
-case 'T': 
-    if (ds.CheckEmpty()) break;
-    cout << "\n\tKurtosis \t\t = " << setprecision(9) << ds.Kurtosis();
-    break;
-case 'U':
-    if (ds.CheckEmpty()) break;
-    cout << "\n\tKurtosis Excess \t\t = " << setprecision(9) << ds.KurtosisExcess();
-    break;
-case 'V':
-    if (ds.CheckEmpty()) break;
-    cout << "\n\t  Coefficient of Variation \t\t = " << ds.CoefficientOfVariation();
-    break;
-case 'W':
-    if (ds.CheckEmpty()) break;
-    cout << "\n\t  Relative Standard Deviation \t\t = " << ds.RelativeSD();
-    break;
-case'X':
-    if (ds.CheckEmpty()) break;
-    ds.FrequencyTable();
-    break;
- case 'Y': ds.displayALL(); break;
+        case 'P':
+            if (ds.CheckEmpty()) break;
+            cout << "\n\tMean Absolute Deviation \t\t = " << ds.MeanAbsoluteDeviation();
+            break;
+        case 'Q':
+            if (ds.CheckEmpty()) break;
+            cout << "\n\tRoot Mean Square \t\t = " << ds.RootMeanSquare();
+            break;
+        case 'R':
+            if (ds.CheckEmpty()) break;
+            cout << "\n\t Standard Error of the Mean \t\t = " << ds.StandardError();
+            break;
+        case 'S':
+            if (ds.CheckEmpty()) break;
+            cout << "\n\tSkewness \t\t = " << ds.Skewness();
+            break;
+        case 'T':
+            if (ds.CheckEmpty()) break;
+            cout << "\n\tKurtosis \t\t = " << setprecision(9) << ds.Kurtosis();
+            break;
+        case 'U':
+            if (ds.CheckEmpty()) break;
+            cout << "\n\tKurtosis Excess \t\t = " << setprecision(9) << ds.KurtosisExcess();
+            break;
+        case 'V':
+            if (ds.CheckEmpty()) break;
+            cout << "\n\t  Coefficient of Variation \t\t = " << ds.CoefficientOfVariation();
+            break;
+        case 'W':
+            if (ds.CheckEmpty()) break;
+            cout << "\n\t  Relative Standard Deviation \t\t = " << ds.RelativeSD();
+            break;
+        case'X':
+            if (ds.CheckEmpty()) break;
+            ds.FrequencyTable();
+            break;
+        case 'Y': ds.displayALL(); break;
         default: cout << "\t\tERROR - Invalid option."; break;
         }
 
@@ -303,7 +303,7 @@ void insertMenu()
         }
 
         cout << "\n\n\t";
-        
+
 
     } while (true);
     system("pause");
@@ -373,7 +373,7 @@ void deleteMenu()
         {
             int val = inputInteger("\n\tSpecify an integer value to find and be deleted from the Dataset: ");
             ds.deleteValue(val);
-            
+
         }
         break;
         case 'B':
