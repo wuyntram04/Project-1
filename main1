@@ -76,7 +76,7 @@ int main()
             break;
         case'H':
             if (ds.CheckEmpty()) break;
-            ds.Mode();
+            ds.Mode(cout);
             break;
         case 'I':
             if (ds.CheckEmpty()) break;
@@ -168,9 +168,25 @@ int main()
             break;
         case'X':
             if (ds.CheckEmpty()) break;
-            ds.FrequencyTable();
+            ds.FrequencyTable(cout);
             break;
-        case 'Y': ds.displayALL(); break;
+        case 'Y': ds.displayALL(cout); break;
+        case 'Z':
+ {
+     string filename;
+     cout << "\nSpecify a text file to save results: ";
+     cin >> filename;
+
+     if (filename.find(".txt") == string::npos) {
+         filename += ".txt";
+     }
+
+     ds.SaveToFile(filename);
+
+     cout << "\nCONFIRMATION: File, " << filename << ", has been generated.\n";
+ }
+    
+     break;
         default: cout << "\t\tERROR - Invalid option."; break;
         }
 
