@@ -282,7 +282,7 @@ void insertMenu()
             string filename;
 
             cout << "\n\n\tSpecify a data text file name to read: ";
-            cin.ignore(numeric_limits<streamsize>::max(), '\n'); // clear leftover input
+            
             getline(cin, filename);
 
             inputFile.open(filename);
