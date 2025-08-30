@@ -285,6 +285,11 @@ void insertMenu()
             
             getline(cin, filename);
 
+               if (filename.find(".txt") == string::npos) 
+{
+       filename += ".txt";
+   }
+            
             inputFile.open(filename);
 
             if (inputFile)
