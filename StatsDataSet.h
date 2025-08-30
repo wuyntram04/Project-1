@@ -221,7 +221,7 @@ double medianInRange(int lo, int hi) const
 			}
 		}
 	}
-void Mode() const
+void Mode(ostream& out) const
 {
 	int n = getSize();
 	const int* arr = data();
@@ -242,7 +242,7 @@ void Mode() const
 		}
 	}
 
-	cout << "\n\tMode(s) \t\t = ";
+	out << "\n\tMode(s) \t\t\t = ";
 	currentCount = 1;
 	for (int i = 1; i <= n; i++) 
 	{
@@ -255,7 +255,7 @@ void Mode() const
 			if (currentCount == maxCount) 
 			{
 				
-				cout << arr[i - 1]<<" ";
+				out << arr[i - 1]<<" ";
 			}
 			currentCount = 1;
 		}
@@ -419,14 +419,14 @@ double RelativeSD() const
 	return CoefficientOfVariation() * 100.0;
 }
 
-void FrequencyTable() const
+void FrequencyTable(ostream& out) const
 {
 	int n = getSize();
 	const int* arr = data();
 
-	cout << left << setw(10) << "Value"
-		<< setw(12) << "Frequency"
-		<< setw(12) << "Frequency %" << endl;
+	out << right << setw(13) << "Value"
+		<< setw(14) << "Frequency"
+		<< setw(14) << "Frequency %" << endl;
 
 	int i = 0;
 	while (i < n)
@@ -442,46 +442,46 @@ void FrequencyTable() const
 		double percent = (count * 100.0) / n;
 
 
-		cout << left << setw(10) << value
-			<< setw(12) << count
-			<< setw(12) << percent << endl;
+		out << right << setw(13) <<value
+			<< setw(14) << count
+			<< setw(14) << fixed << setprecision(1) << percent << endl;
 
 		i += count;
 
 	}
 
-	
 
 }
 
-void displayALL()
+
+void displayALL(ostream& out) const
 {
-	cout << "\n\tMinimum \t\t = " << Minimum();
-	cout << "\n\tMaximum \t\t = " << Maximum();
-	cout << "\n\tRange \t\t\t = " << Range();
-	cout << "\n\tSize \t\t\t = " << getSize();
-	cout << "\n\tSum \t\t\t = " << Sum();
-	cout << "\n\tMean \t\t\t = " << Mean();
-	cout << "\n\tMedian \t\t\t = " << Median();
-	Mode();
-	cout << "\n\tStandard Deviation \t = " << StandDeviation();
-	cout << "\n\tVariance \t\t = " << Variance();
-	cout << "\n\tMidrange \t\t = " << MidRange();
-	cout << "\n\tQuartiles  \t\tQuartiles: ";
-	cout << "\n\t\t\t\tQ1 --> " << fixed << setprecision(1) << Q1();
-	cout << "\n\t\t\t\tQ2 --> " << fixed << setprecision(1) << Median();
-	cout << "\n\t\t\t\tQ3 --> " << fixed << setprecision(1) << Q3();
-	cout << "\n\tInterquartile Range \t = " << IQR();
-	cout << "\n\tOutlinears \t\t =  ";
-	int* out = nullptr;
+	out << "\n\tMinimum \t\t\t = " << Minimum();
+	out << "\n\tMaximum \t\t\t = " << Maximum();
+	out << "\n\tRange \t\t\t\t = " << Range();
+	out << "\n\tSize \t\t\t\t = " << getSize();
+	out << "\n\tSum \t\t\t\t = " << Sum();
+	out << "\n\tMean \t\t\t\t = " << Mean();
+	out << "\n\tMedian \t\t\t\t = " << Median();
+	Mode(out);
+	out << "\n\tStandard Deviation \t\t = " << StandDeviation();
+	out << "\n\tVariance \t\t\t = " << Variance();
+	out << "\n\tMidrange \t\t\t = " << MidRange();
+	out << "\n\tQuartiles  \t\t\t Quartiles: ";
+	out << "\n\t\t\t\t\t Q1 --> " << fixed << setprecision(1) << Q1();
+	out << "\n\t\t\t\t\t Q2 --> " << fixed << setprecision(1) << Median();
+	out << "\n\t\t\t\t\t Q3 --> " << fixed << setprecision(1) << Q3();
+	out << "\n\tInterquartile Range \t\t = " << IQR();
+	out << "\n\tOutlinears \t\t\t =  ";
+	int* outliners = nullptr;
 	int m = 0;
 	double lower = 0.0, upper = 0.0;
 
-	Outliners(out, m, lower, upper);
+	Outliners(outliners, m, lower, upper);
 
 	if (m == 0)
 	{
-		cout << "none";
+		out << "none";
 	}
 	else
 	{
@@ -489,20 +489,35 @@ void displayALL()
 		for (int i = 0; i < m; ++i)
 		{
 			if (i > 0)
-				cout << out[i];
+				out << outliners[i];
 		}
 
 	}
-	if (out) delete[] out;
+	if (outliners) delete[] outliners;
 
-	cout << "\n\tSum of Square \t\t = " << SumOfSquare();
-	cout << "\n\tSkewness \t\t = " << setprecision(9) << Skewness();
-	cout << "\n\tKurtosis \t\t = " << setprecision(9) << Kurtosis();
-	cout << "\n\tKurtosis Excess \t = " << setprecision(9) << KurtosisExcess();
+	out << "\n\tSum of Square \t\t\t = " << SumOfSquare();
+	out << "\n\tSkewness \t\t\t = " << setprecision(9) << Skewness();
+	out << "\n\tKurtosis \t\t\t = " << setprecision(9) << Kurtosis();
+	out << "\n\tKurtosis Excess \t\t = " << setprecision(9) << KurtosisExcess();
+	out << "\n\tCoefficient of Variation \t = " << CoefficientOfVariation();
+	out << "\n\tRelative Standard Deviation \t = " << RelativeSD();
+	out << "\n\n\tFrequency Table\n\n";
+	FrequencyTable(out);
+	
+}
 
+void SaveToFile(const string& filename) const
+{
+	ofstream file(filename);
+	if (file) {
+		displayALL(file);
+		file.close();
+	}
+	cout << "\nResults saved to " << filename << "\n";
 
 }
 };
+
 
 
 
