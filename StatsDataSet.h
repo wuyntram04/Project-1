@@ -40,11 +40,11 @@ public:
 
 	double Mean() const
 	{
-		return (Sum() / getSize()) * 1.0;
+		return (Sum() * 1.0 / getSize());
 	}
 
 	double Median() const
-{
+	{
 	int n = getSize();
 
 	if (n % 2 == 1)
@@ -98,7 +98,7 @@ double Variance() const
 
 double MidRange() const
 {
-	return (Maximum() - Minimum()) / 2;
+	return (Maximum() + Minimum()) / 2;
 }
 double medianInRange(int lo, int hi) const
 	{
@@ -127,10 +127,10 @@ double medianInRange(int lo, int hi) const
 
 		int mid = n / 2;
 
-		if (n % 2 == 1)
+		if ((n % 2) == 1)
 		{
 			// odd: lower = [0, mid)
-			return medianInRange(0, mid);
+			return medianInRange(0, mid );
 		}
 		else
 		{
@@ -242,7 +242,7 @@ void Mode() const
 		}
 	}
 
-	cout << "\n\tMode(s) = \t";
+	cout << "\n\tMode(s) \t\t = ";
 	currentCount = 1;
 	for (int i = 1; i <= n; i++) 
 	{
@@ -331,6 +331,7 @@ double Skewness() const
 		sumCubed += cubed;
 	}
 	bool sample = (getType() == "Sample");
+
 	if (sample)
 	{
 		if (n < 3) return 0.0;
@@ -359,9 +360,8 @@ double Kurtosis() const
 		double diff = arr[i] - mean;
 		sumFourth += pow(diff, 4);
 	}
-	
 	bool sample = (getType() == "Sample");
-	
+
 	if (sample)
 	{
 		// Sample kurtosis using your exact formula
@@ -395,7 +395,7 @@ double KurtosisExcess() const
 	}
 
 	bool sample = (getType() == "Sample");
-	
+
 	if (sample)
 	{
 		double term1 = (n * (n + 1.0)) / ((n - 1.0) * (n - 2.0) * (n - 3.0)) * (sumFourth / pow(stdev, 4));
@@ -503,8 +503,6 @@ void displayALL()
 
 }
 };
-
-
 
 
 
